@@ -1,0 +1,396 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    background-color: gainsboro;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10%;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 0;
+}
+
+.nav-bar button, a {
+    font-family: "Open Sans", sans-serif;
+    margin: 0 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2d9dca;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav-bar button:hover {
+    background-color: #2374dd;
+}
+
+.nav-bar a:hover {
+    background-color: #2374dd;
+}
+
+#conteudo {
+    margin-top: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.listaJogos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.listaJogos>* {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.listaJogos>*:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.listaJogos p {
+    font-size: 16px;
+    text-align: center;
+    margin: 5px 0px 10px 0px;
+}
+
+.listaJogos:first-child {
+    font-weight: bold;
+}
+
+#btnVisitar {
+    background-color: #3da8a8;
+}
+
+.crudBotoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.crudBotoes>* {
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.crudBotoes>*:first-child {
+    background-color: #3bb13f;
+}
+
+.crudBotoes>*:first-child:hover {
+    background-color: #24ad2b;
+}
+
+.crudBotoes>*:last-child {
+    background-color: #d81919;
+}
+
+.crudBotoes>*:last-child:hover {
+    background-color: #ca1515;
+}
+
+
+.form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.form input {
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.form input:focus {
+    outline: none;
+    border-color: #2d9dca;
+}
+
+.form button:first-child:focus {
+    outline: none;
+    border-color: #2d9dca;
+}
+
+.form button:first-child[type="submit"] {
+    background-color: #2d9dca;
+    transition: background-color 0.3s ease;
+    margin: 0px;
+}
+
+.form button:first-child[type="submit"]:hover {
+    background-color: #2374dd;
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+#disciplinaModal {
+    background-color: #ffffffef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 200px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+#disciplinaModal form {
+    display: flex;
+    flex-direction: column;
+}
+
+#disciplinaModal select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    appearance: none; 
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#disciplinaModal select::-ms-expand {
+    display: none;
+}
+
+#disciplinaModal select::after {
+    content: '\25BC'; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+
+#disciplinaModal button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#disciplinaModal button:hover {
+    background-color: #0056b3;
+}
+
+#jogo {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+}
+
+#conteudo h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#containerGrupos {
+    text-align: center;
+    width: 100%;
+}
+
+#containerGrupos>* {
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+#containerGrupos div div:first-child {
+    font-weight: bold;
+}
+
+#containerPalavras {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+#containerPalavras div {
+    background-color: #e7e7e7;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+#containerPalavras div p {
+    margin: 0;
+}
+
+.modalVitoria-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.modalVitoria-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #367e28;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.jogarNovamenteDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#jogarNovamente {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #232323;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+#jogarNovamente:hover {
+    background-color: #45a049;
+}
+
+.modalSalvar-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 200px;
+}
+
+.salvarForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.salvarForm input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.salvarForm button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.salvarForm button:hover {
+    background-color: #45a049;
+}
+
+@keyframes fadeOutBackground {
+    from {
+        background-color: blue;
+    }
+    to {
+        background-color: white;
+    }
+}
+
+/* Aplicando a animação */
+.fade-out-background {
+    animation: fadeOutBackground 1s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Aplicando a animação */
+.fade-out {
+    animation: fadeOut 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.27;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Aplicando a animação */
+.fade-in {
+    animation: fadeIn 3s ease-out forwards;
+}
