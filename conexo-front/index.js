@@ -300,6 +300,7 @@ const mostrarFormularioPalavra = async () => {
     form.setAttribute('class', 'form')
 
     const selectGrupo = document.createElement('select')
+    selectGrupo.setAttribute('multiple', '')
     selectGrupo.setAttribute('id', 'grupo_id')
 
     const defaultOption = document.createElement('option')
@@ -336,15 +337,20 @@ const mostrarFormularioPalavra = async () => {
 
 const salvarPalavra = async (e) => {
     e.preventDefault()
+    debugger
     var form = new FormData();
-    form.set('nome', document.getElementById('nomePalavra').value)
-    form.set('grupos_id', document.getElementById('grupo_id').value)
-    const resposta =  await fetch("http://127.0.0.1:8000/palavras", {
+    form.append('nome', document.getElementById('nomePalavra').value);
+    
+    var options = document.getElementById('grupo_id').selectedOptions;
+    var values = Array.from(options).map(({ value }) => parseInt(value));
+    form.append('grupos_id', values);
+
+    const resposta = await fetch("http://127.0.0.1:8000/palavras", {
         method: "POST",
         body: form,
-    }); 
+    });
     const {data} = await resposta.json()
-    console.log(resposta, data) 
+    console.log(resposta, data)
 
     document.getElementById('nomePalavra').value = ''
     getPalavras()

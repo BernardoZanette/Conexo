@@ -38,11 +38,14 @@ class PalavrasController extends Controller
     {
 
         $data = $request->validated();
-
+        
         $palavra = $this->palavrasRepository->create($data);
         $data['palavras_id'] = $palavra->id;
-
-        $grupoPalavra = $this->gruposPalavrasRepository->create($data);
+        $grupos_ids = $data['grupos_id'];
+        for ($i = 0; $i < count($grupos_ids); $i++) { 
+            $data['grupos_id'] = $grupos_ids[$i];
+            $grupoPalavra = $this->gruposPalavrasRepository->create($data);    
+        }
 
         return new PalavrasResource($palavra);
     }

@@ -12,7 +12,6 @@ class GruposPalavras extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'jogos_id',
         'palavras_id',
         'grupos_id'
     ];
