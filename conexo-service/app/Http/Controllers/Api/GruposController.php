@@ -27,9 +27,12 @@ class GruposController extends Controller
 
     public function index() {
 
-        $grupos = $this->gruposRepository
-            ->join('disciplinas_grupos', 'grupos.id', '=', 'grupos_id')
-            ->get();
+        $grupos = $this->disciplinasGruposRepository->select([
+            'grupos.id AS id', 'grupos.nome AS nome', 'disciplinas.id AS disciplinas_id', 'disciplinas.nome AS disciplinas_nome'
+        ])
+        ->join('disciplinas', 'disciplinas.id', '=', 'disciplinas_id')
+        ->join('grupos', 'grupos.id', '=', 'grupos_id')
+        ->get();
         
         return GruposResource::collection($grupos);
     }

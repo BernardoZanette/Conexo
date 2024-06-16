@@ -119,81 +119,98 @@ const getGrupos = async () => {
     conteudo.innerHTML = 'Aguarde buscar os dados...'
     const resposta = await fetch('http://127.0.0.1:8000/grupos');
     const {data} = await resposta.json()
-    console.log(data)
 
+    let disciplinasUnicas = data.filter((obj, index, self) => {
+        return index === self.findIndex((t) => (
+            t.disciplinas_nome === obj.disciplinas_nome
+        ));
+    }); 
+    
+    const disciplinasDiv = document.createElement('div')
+    disciplinasDiv.setAttribute('class', 'disciplinasListagem')
     const lista = document.createElement('ul')
-    data.forEach(p => {
-        const div = document.createElement('div')
-        const li = document.createElement('li')
-        li.innerText = p.nome
-
-        const btnEditar = document.createElement('button')
-        btnEditar.innerText = 'Editar'
-        btnEditar.addEventListener('click', () => {
-
-            const form = document.createElement('form')
-            form.setAttribute('method', 'POST')
-            form.setAttribute('class', 'form')
-
-            const inputNome = document.createElement('input')
-            inputNome.setAttribute('name', 'editGrupo')
-            inputNome.value = p.nome
-            inputNome.required = true
-
-            const buttonSubmit = document.createElement('button')
-            buttonSubmit.setAttribute('type', 'submit')
-            buttonSubmit.innerText = 'Enviar'
-
-            const btnVoltar = document.createElement('button')
-            btnVoltar.innerText = 'Voltar'
-
-            div.removeChild(li)
-            divBotoes.removeChild(btnEditar)
-            divBotoes.removeChild(btnRemover)
-            div.removeChild(divBotoes)
-
-            divBotoes.setAttribute('class', 'crudBotoes')
-            divBotoes.appendChild(buttonSubmit)
-            divBotoes.appendChild(btnVoltar)
-
-            div.appendChild(form)
-            form.appendChild(inputNome)
-            form.appendChild(divBotoes)
-
-            buttonSubmit.addEventListener('click', async (e) => {
-                if (inputNome.value) {
-                    e.preventDefault()
-                    await fetch(`http://127.0.0.1:8000/grupos/${p.id}`, {
-                        method: "PATCH",
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({disciplinas_id: p.disciplinas_id, nome: inputNome.value})
-                    });
-                    getGrupos()
-                }
+    disciplinasUnicas.forEach(d => {
+        const disciplina = document.createElement('button')
+        disciplina.innerText = d.nome
+        disciplina.addEventListener('click', () => {
+            lista.innerHTML = ''
+            let dataDaDisciplina = data.filter(g => g.disciplinas_id === d.disciplinas_id)
+            dataDaDisciplina.forEach(p => {
+                const div = document.createElement('div')
+                const li = document.createElement('li')
+                li.innerText = p.nome
+        
+                const btnEditar = document.createElement('button')
+                btnEditar.innerText = 'Editar'
+                btnEditar.addEventListener('click', () => {
+        
+                    const form = document.createElement('form')
+                    form.setAttribute('method', 'POST')
+                    form.setAttribute('class', 'form')
+        
+                    const inputNome = document.createElement('input')
+                    inputNome.setAttribute('name', 'editGrupo')
+                    inputNome.value = p.nome
+                    inputNome.required = true
+        
+                    const buttonSubmit = document.createElement('button')
+                    buttonSubmit.setAttribute('type', 'submit')
+                    buttonSubmit.innerText = 'Enviar'
+        
+                    const btnVoltar = document.createElement('button')
+                    btnVoltar.innerText = 'Voltar'
+        
+                    div.removeChild(li)
+                    divBotoes.removeChild(btnEditar)
+                    divBotoes.removeChild(btnRemover)
+                    div.removeChild(divBotoes)
+        
+                    divBotoes.setAttribute('class', 'crudBotoes')
+                    divBotoes.appendChild(buttonSubmit)
+                    divBotoes.appendChild(btnVoltar)
+        
+                    div.appendChild(form)
+                    form.appendChild(inputNome)
+                    form.appendChild(divBotoes)
+        
+                    buttonSubmit.addEventListener('click', async (e) => {
+                        if (inputNome.value) {
+                            e.preventDefault()
+                            await fetch(`http://127.0.0.1:8000/grupos/${p.id}`, {
+                                method: "PATCH",
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({disciplinas_id: p.disciplinas_id, nome: inputNome.value})
+                            });
+                            getGrupos()
+                        }
+                    })
+                    btnVoltar.addEventListener('click', () => {
+                        getGrupos()
+                    })
+                })
+        
+                const btnRemover = document.createElement('button')
+                btnRemover.innerText = 'Remover'
+                btnRemover.addEventListener('click', async () => {
+                    div.remove()
+                    await fetch("http://127.0.0.1:8000/grupos/"+p.id, {method: "DELETE"});
+                })
+                const divBotoes = document.createElement('div')
+                divBotoes.setAttribute('class', 'crudBotoes')
+                divBotoes.appendChild(btnEditar)
+                divBotoes.appendChild(btnRemover)
+                div.appendChild(li)
+                div.appendChild(divBotoes)
+                lista.appendChild(div)
             })
-            btnVoltar.addEventListener('click', () => {
-                getGrupos()
-            })
+            conteudo.appendChild(lista)
         })
-
-        const btnRemover = document.createElement('button')
-        btnRemover.innerText = 'Remover'
-        btnRemover.addEventListener('click', async () => {
-            div.remove()
-            await fetch("http://127.0.0.1:8000/grupos/"+p.id, {method: "DELETE"});
-        })
-        const divBotoes = document.createElement('div')
-        divBotoes.setAttribute('class', 'crudBotoes')
-        divBotoes.appendChild(btnEditar)
-        divBotoes.appendChild(btnRemover)
-        div.appendChild(li)
-        div.appendChild(divBotoes)
-        lista.appendChild(div)
-    })
+        disciplinasDiv.appendChild(disciplina)
+    });
     conteudo.innerHTML = ''
-    conteudo.appendChild(lista)
+    conteudo.appendChild(disciplinasDiv)
 } 
 
 const getPalavras = async () => {
@@ -206,7 +223,7 @@ const getPalavras = async () => {
             t.grupos_nome === obj.grupos_nome
         ));
     });
-    
+
     const gruposDiv = document.createElement('div')
     gruposDiv.setAttribute('class', 'grupoListagem')
     const lista = document.createElement('ul')
@@ -337,13 +354,14 @@ const mostrarFormularioPalavra = async () => {
 
 const salvarPalavra = async (e) => {
     e.preventDefault()
-    debugger
+    
     var form = new FormData();
     form.append('nome', document.getElementById('nomePalavra').value);
     
     var options = document.getElementById('grupo_id').selectedOptions;
-    var values = Array.from(options).map(({ value }) => parseInt(value));
-    form.append('grupos_id', values);
+    var values = Array.from(options).map(({ value }) => Number(value));
+
+    form.append('grupos_id', JSON.stringify(values));
 
     const resposta = await fetch("http://127.0.0.1:8000/palavras", {
         method: "POST",

@@ -18,7 +18,8 @@ class GruposResource extends JsonResource
         return [
             'id' => $this->id,
             'nome' => $this->nome,
-            'disciplinas_id' => $this->disciplinas_id
+            'disciplinas_id' => $this->disciplinas_id,
+            'disciplinas_nome' => $this->disciplinas_nome
         ];
     }
 }

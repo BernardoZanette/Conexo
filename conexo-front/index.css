@@ -61,6 +61,30 @@ body{
     color: #000;
 }
 
+.disciplinasListagem {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.disciplinasListagem button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.disciplinasListagem button:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
 #conteudo {
     padding: 15px;
 }

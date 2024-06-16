@@ -24,8 +24,7 @@ class StoreUpdatePalavrasRequest extends FormRequest
     {
         $rules =  [
             'nome' => 'required|min:2|max:46',
-            "grupos_id" => 'required',
-            "grupos_ids"
+            "grupos_id" => 'required'
         ];
 
         return $rules;

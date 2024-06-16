@@ -36,18 +36,21 @@ class PalavrasController extends Controller
 
     public function store(StoreUpdatePalavrasRequest $request)
     {
-
         $data = $request->validated();
-        
+    
         $palavra = $this->palavrasRepository->create($data);
         $data['palavras_id'] = $palavra->id;
-        $grupos_ids = $data['grupos_id'];
-        for ($i = 0; $i < count($grupos_ids); $i++) { 
-            $data['grupos_id'] = $grupos_ids[$i];
+        $grupos_ids = json_decode($data['grupos_id']);
+        
+        foreach ($grupos_ids as $grupo_id) {
+            $data['grupos_id'] = $grupo_id;
             $grupoPalavra = $this->gruposPalavrasRepository->create($data);    
         }
-
-        return new PalavrasResource($palavra);
+        
+        $response = [
+            'data' => $data,
+        ];
+        return response()->json($response);
     }
 
     public function show(string $id)
